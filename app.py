@@ -1,3 +1,5 @@
+import warnings
+warnings.filterwarnings("ignore", category=UserWarning)
 from flask import Flask, request, jsonify
 import joblib
 import numpy as np

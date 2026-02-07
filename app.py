@@ -1,17 +1,23 @@
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
+import logging
 
 app = Flask(__name__)
+logging.basicConfig(
+    filename="api.log",
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-
-# Load trained model
+# Load trained model & scaler
 model = joblib.load("ev_sales_model.pkl")
+scaler = joblib.load("scaler.pkl")
 @app.route("/")
 def home():
-    return "EV Sales Prediction API is running!"
+    return render_template("index.html")
 
 @app.route('/predict', methods=['POST', 'GET'])
 def predict():
@@ -19,7 +25,7 @@ def predict():
         if request.method == 'GET':
             return jsonify({"message": "API is running"}), 200
         data = request.get_json(force=True)
-        print("Received data:", data)
+        logging.info(f"Received data: {data}")
 
         features = np.array([
             float(data['record_id']),
@@ -40,10 +46,13 @@ def predict():
         ]).reshape(1, -1)
 
         pred = model.predict(features)
+        logging.info(f"Prediction: {pred[0]}")
         return jsonify({"Predicted_EV_Sales": float(pred[0])})
     except Exception as e:
-        print("ERROR:", str(e))
+        logging.error(str(e))
         return jsonify({"error": str(e)}), 500
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

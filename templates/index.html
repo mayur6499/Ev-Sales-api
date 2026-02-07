@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>EV Sales Prediction</title>
+</head>
+<body>
+
+<h2>EV Sales Prediction</h2>
+
+<form id="evForm">
+
+    <label>
+        <input type="number" name="record_id" placeholder="Record ID">
+    </label><br><br>
+    <label>
+        <input type="number" name="country" placeholder="Country Code">
+    </label><br><br>
+    <label>
+        <input type="number" name="region" placeholder="Region Code">
+    </label><br><br>
+    <label>
+        <input type="number" name="ev_brand" placeholder="EV Brand Code">
+    </label><br><br>
+    <label>
+        <input type="number" name="vehicle_type" placeholder="Vehicle Type Code">
+    </label><br><br>
+
+    <label>
+        <input type="number" step="0.1" name="battery_capacity_kwh" placeholder="Battery Capacity (kWh)">
+    </label><br><br>
+    <label>
+        <input type="number" name="vehicle_range_km" placeholder="Vehicle Range (km)">
+    </label><br><br>
+    <label>
+        <input type="number" step="0.1" name="charging_time_hours" placeholder="Charging Time (hours)">
+    </label><br><br>
+    <label>
+        <input type="number" name="charging_stations" placeholder="Charging Stations">
+    </label><br><br>
+    <label>
+        <input type="number" name="govt_incentives" placeholder="Govt Incentives">
+    </label><br><br>
+    <label>
+        <input type="number" name="avg_ev_price_usd" placeholder="Avg EV Price (USD)">
+    </label><br><br>
+
+    <label>
+        <input type="number" name="year" placeholder="Year">
+    </label><br><br>
+    <label>
+        <input type="number" step="0.01" name="fuel_price_index" placeholder="Fuel Price Index">
+    </label><br><br>
+    <label>
+        <input type="number" step="0.01" name="co2_regulation" placeholder="CO₂ Regulation Index">
+    </label><br><br>
+    <label>
+        <input type="number" step="0.01" name="gdp_growth" placeholder="GDP Growth %">
+    </label><br><br>
+
+    <button type="submit">Predict</button>
+
+</form>
+
+<h3 id="result"></h3>
+
+<script>
+document.getElementById("evForm").onsubmit = async function(e) {
+    e.preventDefault();
+
+    let form = e.target;
+    let data = Object.fromEntries(new FormData(form).entries());
+
+    // convert all to numbers
+    Object.keys(data).forEach(k => data[k] = Number(data[k]));
+
+    let response = await fetch("/predict", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(data)
+    });
+
+    let result = await response.json();
+    result.Predicted_EV_Sales = undefined;
+
+    document.getElementById("result").innerText =
+        "Error: " + result.error;
+};
+</script>
+
+</body>
+</html>

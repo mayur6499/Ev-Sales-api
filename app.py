@@ -1,3 +1,4 @@
+import os
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning)
 from flask import Flask, request, jsonify, render_template
@@ -13,8 +14,9 @@ logging.basicConfig(
 )
 
 # Load trained model & scaler
-model = joblib.load("ev_sales_model.pkl")
-scaler = joblib.load("scaler.pkl")
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+scaler = joblib.load(os.path.join(BASE_DIR, "models", "scaler.pkl"))
+model = joblib.load(os.path.join(BASE_DIR, "models", "ev_sales_model.pkl"))
 @app.route("/")
 def home():
     return render_template("index.html")

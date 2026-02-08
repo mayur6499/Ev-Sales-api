@@ -73,17 +73,27 @@ document.getElementById("evForm").onsubmit = async function(e) {
     // convert all to numbers
     Object.keys(data).forEach(k => data[k] = Number(data[k]));
 
-    let response = await fetch("/predict", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify(data)
-    });
+    try {
+        let response = await fetch("/predict", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify(data)
+        });
 
-    let result = await response.json();
-    result.Predicted_EV_Sales = undefined;
+        let result = await response.json();
 
-    document.getElementById("result").innerText =
-        "Error: " + result.error;
+        if (result.Predicted_EV_Sales !== undefined) {
+            document.getElementById("result").innerText =
+                "Predicted EV Sales: " + result.Predicted_EV_Sales;
+        } else {
+            document.getElementById("result").innerText =
+                "Error: " + result.error;
+        }
+
+    } catch (err) {
+        document.getElementById("result").innerText =
+            "Request failed: " + err;
+    }
 };
 </script>
 

@@ -47,9 +47,10 @@ def predict():
             float(data['gdp_growth'])
         ]).reshape(1, -1)
 
-        pred = model.predict(features)
+        features_scaled = scaler.transform(features)
+        pred = model.predict(features_scaled)
         logging.info(f"Prediction: {pred[0]}")
-        return jsonify({"Predicted_EV_Sales": float(pred[0])})
+        return jsonify({"prediction": float(pred[0])})
     except Exception as e:
         logging.error(str(e))
         return jsonify({"error": str(e)}), 500

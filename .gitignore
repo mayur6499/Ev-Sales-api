@@ -1,5 +1,13 @@
+# ignore root pickle files
 scaler.pkl
+ev_sales_model.pkl
+
+# allow models folder
+!models/
+
+# ignore pkl everywhere else
 *.pkl
+
 api.log
 __pycache__/
 .ipynb_checkpoints/

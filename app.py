@@ -5,7 +5,6 @@ from flask import Flask, request, jsonify, render_template
 import joblib
 import numpy as np
 import logging
-
 app = Flask(__name__)
 logging.basicConfig(
     filename="api.log",
@@ -58,4 +57,4 @@ def predict():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    app.run(host="127.0.0.1", port=5000)

@@ -4,3 +4,21 @@
 2026-02-08 00:09:08,440 - INFO -  * Restarting with stat
 2026-02-08 00:09:10,954 - WARNING -  * Debugger is active!
 2026-02-08 00:09:10,970 - INFO -  * Debugger PIN: 426-444-492
+2026-02-13 12:41:07,796 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:10000
+ * Running on http://192.168.1.5:10000
+2026-02-13 12:41:07,797 - INFO - [33mPress CTRL+C to quit[0m
+2026-02-13 12:48:31,648 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.5:5000
+2026-02-13 12:48:31,648 - INFO - [33mPress CTRL+C to quit[0m
+2026-02-13 12:48:59,303 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2026-02-13 12:48:59,303 - INFO - [33mPress CTRL+C to quit[0m
+2026-02-13 12:49:25,994 - INFO - 127.0.0.1 - - [13/Feb/2026 12:49:25] "GET / HTTP/1.1" 200 -
+2026-02-13 12:49:26,479 - INFO - 127.0.0.1 - - [13/Feb/2026 12:49:26] "[33mGET /favicon.ico HTTP/1.1[0m" 404 -
+2026-02-13 12:50:16,580 - INFO - Received data: {'record_id': 4, 'country': 2, 'region': 4, 'ev_brand': 3, 'vehicle_type': 3, 'battery_capacity_kwh': 0.4, 'vehicle_range_km': -3, 'charging_time_hours': -0.1, 'charging_stations': -4, 'govt_incentives': -2, 'avg_ev_price_usd': -12, 'year': 3, 'fuel_price_index': 0.02, 'co2_regulation': -0.05, 'gdp_growth': 0.04}
+2026-02-13 12:50:16,584 - INFO - Prediction: 801.8314217348177
+2026-02-13 12:50:16,585 - INFO - 127.0.0.1 - - [13/Feb/2026 12:50:16] "POST /predict HTTP/1.1" 200 -
